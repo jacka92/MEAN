@@ -1,33 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var page1Service = require('../Services/page1-service');
+var restrict = require('../auth/restrict')
 
-router.get('/', function(req, res, next) {
-  res.render('orders/index', { title: 'Place an order' });
-});
-
-router.get('/page2', function(req, res, next) {
-  res.render('orders/page2', { title: 'Place an order' });
-});
-
-router.post('/page2', function(req, res, next) {
-  page1Service.addPage1(req.body, function(err){
-    if(err){
-    var vm = {
-      title: 'Page 1', 
-      input: req.body,
-      error: 'Something went wrong: ' + err
-    };
-    return res.render('/orders/', vm);
+router.get('/', restrict, function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
   }
-  //redirect to page 2
-  res.render('orders/page2');
-  });
+  var vm = {
+    title: 'Personal Statistics',
+    firstName: req.user ? req.user.firstName : null
+  };
+  res.render('orders/index', vm);
 });
-
-router.post('/page3', function(req, res, next){
-  res.render('orders/page3');
-})
-
 
 module.exports = router;

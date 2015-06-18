@@ -1,97 +1,26 @@
-<div id="form_container">
-    <h1><a>ISEH National Tendinopathy Centre</a></h1>
-    <h2>Tendinopathy Clinic – Assessment/Measurement Outcome Proforma</h2>
-    <form id="form_1018014" class="appnitro" method="post" action="/users/login">
-        <ul>
-            <li id="li_1">
-                <label class="description" for="element_1">Patient Name </label>
-                <div>
-                    <input id="element_1" name="name" class="element text medium" type="text" maxlength="255" value="{{input.name}}" required />
-                </div>
-            </li>
-            <li id="li_2">
-                <label class="description" for="element_2">Hospital Number </label>
-                <div>
-                    <input id="element_2" name="hospitalNumber" class="element text medium" type="text" maxlength="255" value="{{input.hospitalNumber}}" required/>
-                </div>
-            </li>
-            <li id="li_3">
-                <label class="description" for="element_3">Clinic Date </label>
-                <span>
-				<input id="element_3_1" name="clinicDate" class="element text" size="2" maxlength="2" value="{{input.clinicDate}}" type="text" > 
-				<label for="element_3_1">MM</label>
-			</span>
-                <span>
-				<input id="element_3_2" name="clinicDate" class="element text" size="2" maxlength="2" value="{{input.clinicDate}}" type="text" > 
-				<label for="element_3_2">DD</label>
-			</span>
-                <span>
-				<input id="element_3_3" name="clinicDate" class="element text" size="4" maxlength="4" value="{{input.element_3_3}}" type="text" >
-				<label for="element_3_3">YYYY</label>
-			</span>
-
-            </li>
-            <li id="li_4">
-                <label class="description" for="element_4">Date of birth </label>
-                <span>
-			<input id="element_4_1" name="DOB" class="element text" size="2" maxlength="2" value="{{input.DOB}}" type="text" > 
-			<label for="element_4_1">MM</label>
-		</span>
-                <span>
-			<input id="element_4_2" name="DOB" class="element text" size="2" maxlength="2" value="{{input.DOB}}" type="text" > 
-			<label for="element_4_2">DD</label>
-		</span>
-                <span>
-			<input id="element_4_3" name="DOB" class="element text" size="4" maxlength="4" value="{{input.DOB}}" type="text" >
-			<label for="element_4_3">YYYY</label>
-		</span>
-
-                <span id="calendar_4">
-				
-		</span>
-
-            </li>
-            <li id="li_5">
-                <label class="description" for="element_5">Telephone/Mobile Number </label>
-                <div>
-                    <input id="element_5" name="phone" class="element text medium" type="text" maxlength="255" value="{{input.phone}}" />
-                </div>
-            </li>
-            <li id="li_9">
-                 <label class="description" for="element_9">Gender </label>
-                <span>
-	<input id="element_9_1" name="gender" class="element radio" type="radio" value="{{input.gender}}" required/>
-	<label class="choice" for="element_9_1">Male</label>
-	<input id="element_9_2" name="gender" class="element radio" type="radio" value="{{input.gender}}" required/>
-	<label class="choice" for="element_9_2">Female</label>
-</span>
-            </li>
-            <li id="li_6">
-                <label class="description" for="element_6">Address </label>
-                <div>
-                    <textarea id="element_6" name="address" class="element textarea medium" value="{{input.address}}" required></textarea>
-                </div>
-            </li>
-            <li id="li_7">
-                <label class="description" type="email" for="element_7">Email </label>
-                <div>
-                    <input id="element_7" name="email" class="element text medium" type="text" maxlength="255" value="{{input.email}}" />
-                </div>
-            </li>
-            <li id="li_8">
-                <label class="description" for="element_8">Dr/Physio Name and signature </label>
-                <div>
-                    <input id="element_8" name="drName" class="element text medium" type="text" maxlength="255" value="{{input.drName}}" />
-                </div>
-            </li>
-
-            <li class="buttons">
-                <input type="hidden" name="form_id" value="1018014" />
-                <input id="saveForm" class="btn btn-default" type="submit" name="submit" value="Register" />
-            </li>
-        </ul>
-        <span style="color:red;">{{error}}</span>
-        <script src="/bower/angular/angular.min.js"></script>
-        <script src="/bower/angular-route/angular-route.min.js"></script>
-    </form>
+<div class="textwidget margin-top-30">
+  </div>
+<div class="widget">
+  <form name="create-user-form" id="create-user-form" method="post">
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" id="firstName" name="firstName" required value="{{input.firstName}}" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" id="lastName" name="lastName" required value="{{input.lastName}}" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required value="{{input.email}}" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="off" required />
+    </div>
+    <div class="form-submit">
+      <input type="submit" value="Create my account" />
+    </div>
+    <span style="color:red;">{{error}}</span>
+  </form>
 </div>

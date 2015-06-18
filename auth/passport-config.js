@@ -1,4 +1,4 @@
-/*module.exports = function() {
+module.exports = function() {
   var passport = require('passport');
   var bcrypt = require('bcrypt');
   var passportLocal = require('passport-local');
@@ -33,4 +33,4 @@
       next(err, user);
     });
   });
-};*/
+};
