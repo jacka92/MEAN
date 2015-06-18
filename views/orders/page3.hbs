@@ -1,0 +1,132 @@
+<script>
+    $(function() {
+        var spinner = $(".spinner").spinner({
+            min: 0,
+            max: 10
+        });
+
+        $("#disable").click(function() {
+            if (spinner.spinner("option", "disabled")) {
+                spinner.spinner("enable");
+            }
+            else {
+                spinner.spinner("disable");
+            }
+        });
+        $("#destroy").click(function() {
+            if (spinner.spinner("instance")) {
+                spinner.spinner("destroy");
+            }
+            else {
+                spinner.spinner();
+            }
+        });
+        $("#getvalue").click(function() {
+            alert(spinner.spinner("value"));
+        });
+        $("#setvalue").click(function() {
+            spinner.spinner("value", 5);
+        });
+
+        $("button").button();
+    });
+</script>
+<div id="form_container" style="width: 60%;">
+    <h1><a>In this questionnaire (pages 3-4), the term pain refers specifically to pain in the Achilles tendon region.</a></h1>
+    <h1><a>In this questionnaire (pages 3-4), the term pain refers specifically to pain in the Achilles tendon region.</a></h1>
+    <h2>In this questionnaire (pages 3-4), the term pain refers specifically to pain in the Achilles tendon region. For questions that ask about pain, please answer 10 for no pain and 0 for strong severe pain.</h2>
+    <form id="form_1018014" class="appnitro" method="post" action="#">
+        <ul>
+            <li id="li_1">
+                <div>
+                    <label class="description" for="element_1">1. For how many minutes do you have stiffness in the Achilles region of first getting up? Please answer 10 for 0 minutes and 0 for 100 minutes.</label>
+                    <input id="element_1" class="spinner" name="element_1">
+                    <label class="description" for="element_2" for="spinner">2. Once you are warmed up for the day, do you have pain when stretching the Achilles tendon fully over the edge of a step? (Keeping knee straight)</label>
+                    <input class="spinner" name="value">
+                    <label class="description" for="element_2" for="spinner">3. After walking on flat ground for 30 minutes, do you have pain within the next 2 hours? (If unable to walk on flat ground for 30 minutes because of pain, score 0 for this question.)</label>
+                    <input class="spinner" name="value">
+                    <label class="description" for="element_2" for="spinner">4. Do you have pain walking downstairs with a normal gait cycle?</label>
+                    <input class="spinner" name="value">
+                    <label class="description" for="element_2" for="spinner">5. Do you have pain during or immediately after doing 10 (single leg) heel raises from a flat surface?</label>
+                    <input class="spinner" name="value">
+                    <label class="description" for="element_2" for="spinner">6. How many single leg hops can you do without pain?</label>
+                    <input class="spinner" name="value">
+
+                </div>
+                <li id="li_17">
+                    <label class="description" for="element_17">7. Are you currently untaking sport or any other physical activity? </label>
+                    <span>
+									<input id="element_17_1" name="element_17" class="element radio" type="radio" value="1" />
+									<label class="choice" for="element_17_1">Not at all</label>
+									<input id="element_17_2" name="element_17" class="element radio" type="radio" value="2" />
+									<label class="choice" for="element_17_2">Modified training ± modified competition</label>
+									<input id="element_17_3" name="element_17" class="element radio" type="radio" value="3" />
+									<label class="choice" for="element_17_3">Full training competition but not at same level when symptoms began</label>
+									<input id="element_17_3" name="element_17" class="element radio" type="radio" value="3" />
+									<label class="choice" for="element_17_3">Competing at the same or higher level as when symptoms began</label>
+								</span>
+                </li>
+                <li id="li_17">
+                    <label class="description" for="element_17">8. Please complete Either A, B or C in this question.
+                        <br> If you have no pain while undertaking Achilles tendon loading sports please complete Q8a only.
+                        <br> If you have pain while undertaking Achilles tendon loading sports but it does not stop you from completing the activity, please complete Q8b only.
+                        <br> If you have pain that stops you from completing Achilles tendon loading sports, please complete Q8c only. </label>
+                    <li id="li_1">
+                        <label class="description" for="element_1">A. If you have no pain while undertaking Achilles tendon loading sports, for how long can you train/practise? </label>
+                        <span>
+											<input id="element_1_1" name="element_1" class="element radio" type="radio" value="1" />
+											<label class="choice" for="element_1_1">NIL</label>
+											<input id="element_1_2" name="element_1" class="element radio" type="radio" value="2" />
+											<label class="choice" for="element_1_2">1-10 Mins</label>
+											<input id="element_1_3" name="element_1" class="element radio" type="radio" value="3" />
+											<label class="choice" for="element_1_3">11-20 mins</label>
+											<input id="element_1_4" name="element_1" class="element radio" type="radio" value="4" />
+											<label class="choice" for="element_1_4">21-30 mins</label>
+											<input id="element_1_5" name="element_1" class="element radio" type="radio" value="5" />
+											<label class="choice" for="element_1_5">>30 mins</label>
+
+										</span>
+                    </li>
+                    <li id="li_2">
+                        <label class="description" for="element_2">B. If you have some pain while undertaking Achilles tendon loading sport, but it does not stop you from completing your training/practice for how long can you train/practise? </label>
+                        <span>
+										<input id="element_2_1" name="element_2" class="element radio" type="radio" value="1" />
+										<label class="choice" for="element_2_1">NIL</label>
+										<input id="element_2_2" name="element_2" class="element radio" type="radio" value="2" />
+										<label class="choice" for="element_2_2">1-10 Mins</label>
+										<input id="element_2_3" name="element_2" class="element radio" type="radio" value="3" />
+										<label class="choice" for="element_2_3">11-20 mins</label>
+										<input id="element_2_4" name="element_2" class="element radio" type="radio" value="4" />
+										<label class="choice" for="element_2_4">21-30 mins</label>
+										<input id="element_2_5" name="element_2" class="element radio" type="radio" value="5" />
+										<label class="choice" for="element_2_5">>30 mins</label>
+
+									</span>
+                    </li>
+                    <li id="li_3">
+                        <label class="description" for="element_3">C. If you have pain that stops you from completing you training/practice in Achilles tendon loading sports, for how long can you train/practise? </label>
+                        <span>
+									<input id="element_3_1" name="element_3" class="element radio" type="radio" value="1" />
+									<label class="choice" for="element_3_1">NIL</label>
+									<input id="element_3_2" name="element_3" class="element radio" type="radio" value="2" />
+									<label class="choice" for="element_3_2">1-10 Mins</label>
+									<input id="element_3_3" name="element_3" class="element radio" type="radio" value="3" />
+									<label class="choice" for="element_3_3">11-20 mins</label>
+									<input id="element_3_4" name="element_3" class="element radio" type="radio" value="4" />
+									<label class="choice" for="element_3_4">21-30 mins</label>
+									<input id="element_3_5" name="element_3" class="element radio" type="radio" value="5" />
+									<label class="choice" for="element_3_5">>30 mins</label>
+
+								</span>
+                    </li>
+
+                    <li class="buttons">
+                        <input type="hidden" name="form_id" value="1020175" />
+
+                        <input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+                    </li>
+
+                </li>
+        </ul>
+    </form>
+</div>
