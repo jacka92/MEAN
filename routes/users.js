@@ -5,6 +5,7 @@ var userService = require('../services/user-service');
 var config = require('../config');
 
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -35,6 +36,7 @@ router.post('/create', function(req, res, next) {
   });
 });
 
+///
 router.post('/login', 
   function(req, res, next) {
     req.session.orderId = 12345;
