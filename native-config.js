@@ -3,7 +3,8 @@ var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
 //connect away
-MongoClient.connect('mongodb://localhost:27017/rtr', function(err, db) {
+exports.insert = function(){
+    MongoClient.connect('mongodb://localhost:27017/rtr', function(err, db) {
   if (err) throw err;
   
 
@@ -11,8 +12,12 @@ MongoClient.connect('mongodb://localhost:27017/rtr', function(err, db) {
 //	var document = {name:"David", title:"About MongoDB"};
   
 	//insert record
+	
 	db.collection('test').insert(spursData, function(err, records) {
 		if (err) throw err;
 		
 	});
 });
+
+}
+
