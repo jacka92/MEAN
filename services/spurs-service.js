@@ -17,3 +17,9 @@ exports.addSpurs = function(user, next) {
       next(null);
     });
   };
+
+exports.findUser = function(lastName, next) {
+  Spurs.find({lastName: lastName}, function(err, user) {
+    next(err, user);    
+  });
+};
