@@ -18,23 +18,36 @@ router.get('/', restrict, function(req, res, next) {
     return res.redirect('/');
   }
   var vm = {
-    title: 'Personal Statistics',
+    //title: 'Personal Statistics',
+    firstName: req.user? req.user.firstName: null,
     lastName: req.user? req.user.lastName: null
   };
   console.log(vm.lastName);
   
-  mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
+  
+  res.render('orders/index');
+  
+});
+
+
+router.get('/api/players', restrict, function(req, res, next) { //Some alterations needed here: identify by I
+  var vm = {
+    //title: 'Personal Statistics',
+    firstName: req.user? req.user.firstName: null,
+    lastName: req.user? req.user.lastName: null
+  };
+   mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
        if(err) { return console.dir(err); }
 
        var collection = db.collection("test");
-  
-      collection.find({'Player_Display_Name': vm.lastName}).each(function(err,docs){
+      
+       collection.findOne({'Player_Display_Name': vm.lastName}, function(err,docs){
+        //console.log('Error!'); ///Getting called twice here
         if(err) { return console.dir(err); }
         
-        res.render('orders/index',{resultfind : docs});
+        res.json(docs);
       });
- 
-  console.log('lastname: ' + vm.lastName);
+      
 });
 });
 

@@ -12,7 +12,6 @@
   <link rel='stylesheet' href='/stylesheets/style.css' type='text/css' media='all' />
   <link id="twentytwelve-fonts-css" media="all" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" rel="stylesheet">
   <script type='text/javascript' src='/js/jquery.js'></script>
-  
   <script type='text/javascript' src="/js/main.js"></script>
 </head>
 
@@ -46,12 +45,13 @@
         </div>
       </nav>
     </header>
-    {{#if firstName}}
+    {{#if resultfind.Player_Display_Name}}
     <div id="greeting" style="float:right">
-      <strong>Hi, {{firstName}}! {{lastName}}, </strong>
+      <strong>Hi, {{resultfind.Player_Display_Name}}! </strong>
       <a href="/users/logout">Log out</a>
     </div>
     {{/if}}
+    <a href="/users/logout">Log out</a>
     <div id="main" class="wrapper">
       <div id="primary" class="site-content">
         <div id="content" role="main">
