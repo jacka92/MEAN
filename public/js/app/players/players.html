@@ -1,8 +1,23 @@
 <div class="widget">
   <strong ng-show="!players">Loading...</strong>
   <ul>
-    <li ng-repeat="player in players">
-       {{player}}
+    <li ng-repeat="(key,value) in players">
+       {{key}} : {{value}}
     </li>
   </ul>
 </div>
+
+<!--
+
+Plan would be to do:
+
+<li ng-repeat="player in players">
+{{player.acceleration}}
+
+for the acceleration view and so on. Then render the values in a chart.
+
+
+
+
+
+--->
