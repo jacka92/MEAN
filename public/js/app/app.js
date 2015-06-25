@@ -22,7 +22,7 @@ app.config(['$routeProvider',
 app.factory('api' ,['$resource', function($resource){
   return $resource('/orders/api/players', {}, {
   get: {
-  isArray : false}
+  isArray : true}
   });
 }]);
 

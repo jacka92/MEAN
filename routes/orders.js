@@ -41,10 +41,9 @@ router.get('/api/players', restrict, function(req, res, next) { //Some alteratio
 
        var collection = db.collection("test");
       
-       collection.findOne({'Player_Display_Name': vm.lastName}, function(err,docs){
+       collection.find({'Player_Display_Name': vm.lastName}).toArray(function(er,docs){ //collection.find().toArray(function(err, docs){
         //console.log('Error!'); ///Getting called twice here
         if(err) { return console.dir(err); }
-        
         res.json(docs);
       });
       
