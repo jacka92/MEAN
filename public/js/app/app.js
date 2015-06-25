@@ -2,27 +2,43 @@
 
 var app = angular.module('app', ['ngResource', 'ngRoute']);
 
-app.config(['$routeProvider', 
-  function ($routeProvider) {
+app.config(['$routeProvider',
+  function($routeProvider) {
     $routeProvider
       .when('/players', {
         templateUrl: '/js/app/players/players.html',
         controller: 'PlayersController',
         controllerAs: 'vm'
       })
-      .otherwise({redirectTo: '/players'});
-  }]);
-  
-  app.controller('PlayersController', ['$scope', 'api', '$rootScope', function($scope, api, $rootScope){
-  api.get(function(data){
+      .when('/chart', {
+        templateUrl: '/js/app/players/chart.html',
+        controller: 'ChartController',
+        controllerAs: 'vm'
+      })
+      .otherwise({
+        redirectTo: '/players'
+      });
+  }
+]);
+
+app.controller('PlayersController', ['$scope', 'api', '$rootScope', function($scope, api, $rootScope) {
+  api.get(function(data) {
     $scope.players = data;
   });
 }]);
 
-app.factory('api' ,['$resource', function($resource){
+app.controller('ChartController',['$scope', 'api', '$rootScope', function($scope, api, $rootScope) {
+  api.get(function(data) {
+    $scope.players = data;
+  });
+}]);
+
+
+app.factory('api', ['$resource', function($resource) {
   return $resource('/orders/api/players', {}, {
-  get: {
-  isArray : true}
+    get: {
+      isArray: true
+    }
   });
 }]);
 
@@ -32,13 +48,13 @@ app.factory('api' ,['$resource', function($resource){
           return response.data;
         });*/
 
-  /*
+/*
   
-  $routeProvider.when('/view/:playerId', {
-    templateUrl : ''/js/app/players/players.html',
-    controller : 'PlayersController'
-  });
+$routeProvider.when('/view/:playerId', {
+  templateUrl : ''/js/app/players/players.html',
+  controller : 'PlayersController'
+});
   
   
   
-  */
+*/
