@@ -1,16 +1,24 @@
-
-<div id="container" style="width:100%; height:400px;"></div>
+<div id="container" style="width:100%; height:400px;">
+    <highchart id="chart1" config="chartConfig"></highchart>
+</div>
+<ul>
+    <li id="dates" class="dates" ng-repeat="player in players">
+       {{player.Session_Date}}
+    </li>
+  </ul>
+  <button ng-click="logText()">Log</button>
 <script>
-    jQuery(function () { 
+
+/*jQuery(function () { 
     jQuery('#container').highcharts({
         chart: {
-            type: 'bar'
+            type: 'line'
         },
         title: {
             text: 'Fruit Consumption'
         },
         xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
+            categories: $scope.players[0].Session_Date
         },
         yAxis: {
             title: {
@@ -18,12 +26,9 @@
             }
         },
         series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
+            name: '',
+            data: [1, 2]
         }]
     });
-});
+});*/
 </script>

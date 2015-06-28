@@ -50,6 +50,26 @@ router.get('/api/players', restrict, function(req, res, next) { //Some alteratio
 });
 });
 
+router.get('/api/dates', restrict, function(req, res, next) { //Some alterations needed here: identify by I
+  var vm = {
+    //title: 'Personal Statistics',
+    firstName: req.user? req.user.firstName: null,
+    lastName: req.user? req.user.lastName: null
+  };
+   mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
+       if(err) { return console.dir(err); }
+
+       var collection = db.collection("test");
+      
+       collection.find({'Player_Display_Name': vm.lastName}).toArray(function(er,docs){ //collection.find().toArray(function(err, docs){
+        
+        if(err) { return console.dir(err); }
+        res.send(docs);
+      });
+      
+});
+});
+
 module.exports = router;
 
 

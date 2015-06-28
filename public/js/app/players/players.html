@@ -1,12 +1,14 @@
+<div ng-controller="PlayersController" style="text-align:center">
 <div class="widget">
   <strong ng-show="!players">Loading...</strong>
   <ul>
-    <li ng-repeat="(key,value) in players">
+    <li class="dates" ng-repeat="(key,value) in players">
        Session_Date : {{value.Session_Date}}
     </li>
   </ul>
 </div>
-
+<a href="#/chart"><button>Chart</button></a> 
+</div>
 <!--
 
 Plan would be to do:
