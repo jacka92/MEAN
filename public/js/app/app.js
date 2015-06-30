@@ -1,8 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ngRoute','highcharts-ng']);
-
-//app = angular.module('myapp', ["highcharts-ng"]); //install highcharts with bower!
+var app = angular.module('app', ['ngResource', 'ngRoute', 'highcharts-ng']);
 
 app.config(['$routeProvider',
   function($routeProvider) {
@@ -32,58 +30,58 @@ app.factory('api', ['$resource', function($resource) {
 }]);
 
 
-/*app.controller('PlayersController', ['$scope', 'api', '$rootScope', function($scope, api, $rootScope) {
-  api.get(function(data) {
-    $scope.players = data;
-  });
-  
-}]);*/
-
 app.controller('PlayersController', function($scope, $http) {
-    $http.get("/orders/api/players")
-    .success(function(response) {$scope.players = response;});
+  $http.get("/orders/api/players")
+    .success(function(response) {
+      $scope.players = response;
+    });
 });
 
 
 app.controller('ChartController', function($scope, $http) {
 
-$http.get("/orders/api/players")
+  $http.get("/orders/api/players")
     .success(function(response) {
       $scope.players = response;
-     var cats = [];
-var players = $scope.players;
-      for(var i=0;i<players.length;i++){
-  var string = '';
-  string = players[i].Session_Date;
-  cats.push(string);
-}
+      var cats = [];
+      var HML = [];
+      var players = $scope.players;
+      
+      for (var i = 0; i < players.length; i++) {
+        var string = '';
+        string = players[i].Session_Date;
+        cats.push(string);
+        var j = parseInt(players[i].HML_Distance);
+        HML.push(j);
+      }
 
-$scope.chartConfig = {
+      $scope.chartConfig = {
         options: {
-            chart: {
-                type: 'line'
-            }, xAxis: {
+          chart: {
+            type: 'line'
+          },
+          xAxis: {
             categories: cats ///array of dates
-        },
+          },
         },
         series: [{
-            data: [10,11]
+          data: HML
         }],
         title: {
-            text: 'Hello'
+          text: 'HML Distance'
         },
 
         loading: false
-    };
-      
+      };
+
     });
- 
 
 
-$scope.logText = function(){
-  console.log($scope.players);
-};
+
+  $scope.logText = function() {
+    console.log($scope.players);
+  };
 
 
-  
+
 });
