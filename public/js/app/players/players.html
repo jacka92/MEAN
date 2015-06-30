@@ -1,8 +1,8 @@
 <div ng-controller="PlayersController" style="text-align:center">
 <div class="widget">
   <strong ng-show="!players">Loading...</strong>
-  <p>
-    Hi {{players.Player_First_Name}}
+  <p ng-show="players[0].Player_First_Name">
+    
   </p>
 </div>
 <a href="#/hml"><button>HML Distance</button></a>
