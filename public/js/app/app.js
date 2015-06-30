@@ -10,9 +10,29 @@ app.config(['$routeProvider',
         controller: 'PlayersController',
         controllerAs: 'vm'
       })
-      .when('/chart', {
-        templateUrl: '/js/app/players/chart.html',
-        controller: 'ChartController',
+      .when('/hml', {
+        templateUrl: '/js/app/players/hml.html',
+        controller: 'HMLController',
+        controllerAs: 'vm'
+      })
+      .when('/accelerations', {
+        templateUrl: '/js/app/players/acc.html',
+        controller: 'accController',
+        controllerAs: 'vm'
+      })
+      .when('/decelerations', {
+        templateUrl: '/js/app/players/dec.html',
+        controller: 'decController',
+        controllerAs: 'vm'
+      })
+      .when('/distanceTotal', {
+        templateUrl: '/js/app/players/dist.html',
+        controller: 'distController',
+        controllerAs: 'vm'
+      })
+      .when('/highSpeedRunning', {
+        templateUrl: '/js/app/players/hsr.html',
+        controller: 'hsrController',
         controllerAs: 'vm'
       })
       .otherwise({
@@ -38,7 +58,7 @@ app.controller('PlayersController', function($scope, $http) {
 });
 
 
-app.controller('ChartController', function($scope, $http) {
+app.controller('HMLController', function($scope, $http) {
 
   $http.get("/orders/api/players")
     .success(function(response) {
@@ -76,12 +96,165 @@ app.controller('ChartController', function($scope, $http) {
 
     });
 
+});
 
+app.controller('accController', function($scope, $http) {
 
-  $scope.logText = function() {
-    console.log($scope.players);
-  };
+  $http.get("/orders/api/players")
+    .success(function(response) {
+      $scope.players = response;
+      var cats = [];
+      var HML = [];
+      var players = $scope.players;
+      
+      for (var i = 0; i < players.length; i++) {
+        var string = '';
+        string = players[i].Session_Date;
+        cats.push(string);
+        var j = parseInt(players[i].MEAN_of_Accelerations);
+        HML.push(j);
+      }
 
+      $scope.chartConfig = {
+        options: {
+          chart: {
+            type: 'line'
+          },
+          xAxis: {
+            categories: cats ///array of dates
+          },
+        },
+        series: [{
+          data: HML
+        }],
+        title: {
+          text: 'Accelerations'
+        },
 
+        loading: false
+      };
+
+    });
 
 });
+
+app.controller('decController', function($scope, $http) {
+
+  $http.get("/orders/api/players")
+    .success(function(response) {
+      $scope.players = response;
+      var cats = [];
+      var HML = [];
+      var players = $scope.players;
+      
+      for (var i = 0; i < players.length; i++) {
+        var string = '';
+        string = players[i].Session_Date;
+        cats.push(string);
+        var j = parseInt(players[i].Decelerations);
+        HML.push(j);
+      }
+
+      $scope.chartConfig = {
+        options: {
+          chart: {
+            type: 'line'
+          },
+          xAxis: {
+            categories: cats ///array of dates
+          },
+        },
+        series: [{
+          data: HML
+        }],
+        title: {
+          text: 'Decelerations'
+        },
+
+        loading: false
+      };
+
+    });
+
+});
+
+app.controller('distController', function($scope, $http) {
+
+  $http.get("/orders/api/players")
+    .success(function(response) {
+      $scope.players = response;
+      var cats = [];
+      var HML = [];
+      var players = $scope.players;
+      
+      for (var i = 0; i < players.length; i++) {
+        var string = '';
+        string = players[i].Session_Date;
+        cats.push(string);
+        var j = parseInt(players[i].Distance_Total);
+        HML.push(j);
+      }
+
+      $scope.chartConfig = {
+        options: {
+          chart: {
+            type: 'line'
+          },
+          xAxis: {
+            categories: cats ///array of dates
+          },
+        },
+        series: [{
+          data: HML
+        }],
+        title: {
+          text: 'Distance Total'
+        },
+
+        loading: false
+      };
+
+    });
+
+});
+
+app.controller('hsrController', function($scope, $http) {
+
+  $http.get("/orders/api/players")
+    .success(function(response) {
+      $scope.players = response;
+      var cats = [];
+      var HML = [];
+      var players = $scope.players;
+      
+      for (var i = 0; i < players.length; i++) {
+        var string = '';
+        string = players[i].Session_Date;
+        cats.push(string);
+        var j = parseInt(players[i].High_Speed_Running);
+        HML.push(j);
+      }
+
+      $scope.chartConfig = {
+        options: {
+          chart: {
+            type: 'line'
+          },
+          xAxis: {
+            categories: cats ///array of dates
+          },
+        },
+        series: [{
+          data: HML
+        }],
+        title: {
+          text: 'High Speed Running'
+        },
+
+        loading: false
+      };
+
+    });
+
+});
+
