@@ -43,6 +43,9 @@ app.config(['$routeProvider',
 
 app.controller('PlayersController', function($scope, $http, $rootScope) {
   //load values for measures here and pass to scope
+
+  ///Wrap in function initiated when a player from dropdown has been selected!
+
   $http.get("/orders/api/players") ///Ideally, get ("/orders/api/players:PlayerId")
     .success(function(response) {
       $scope.players = response;
@@ -80,23 +83,46 @@ app.controller('PlayersController', function($scope, $http, $rootScope) {
 
 
 app.controller('HMLController', function($scope, $http, $rootScope) {
+  /* $scope.chartConfig = {
+     options: {
+       chart: {
+         type: 'line'
+       },
+       xAxis: {
+         categories: $rootScope.cats //dates
+       },
+     },
+     series: [{
+       data: $rootScope.hml
+     }],
+     title: {
+       text: 'HML Distance'
+     },
+
+     loading: false
+   };*/
+
   $scope.chartConfig = {
     options: {
       chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats //dates
+        type: "areaspline"
       },
     },
     series: [{
-      data: $rootScope.hml
+      name: "Injury",
+      data: [1250, 1250, null, 1250, 2],
+      connectNulls: false,
+      id: "series-1"
+    }, {
+      name: "HML",
+      data: $rootScope.hml,
+      id: "series-2"
     }],
     title: {
-      text: 'HML Distance'
+      text: "Hello"
     },
-
-    loading: false
+    loading: false,
+    size: {}
   };
 
 });

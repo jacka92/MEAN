@@ -32,7 +32,7 @@ router.get('/', restrict, function(req, res, next) {
 });
 
 
-router.get('/api/players', restrict, function(req, res, next) { 
+router.get('/api/players', restrict, function(req, res, next) { ////api/players:PlayerId
   var vm = {
     //title: 'Personal Statistics',
     firstName: req.user? req.user.firstName: null,
