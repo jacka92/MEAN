@@ -2,20 +2,22 @@
 <div class="widget">
   <strong ng-show="!Ids">Loading...</strong>
   
-<!-----  <ul data-ng-repeat="name in names">
-    <li>{{name}}</li>
-  </ul> -->
-  
-    <!-- Simple dropdown -->
-   
-      <select class="dropdown-menu">
+
+  <!---    <select class="dropdown-menu">
         <a ng-repeat="name in Ids" href = "#/{{name.Player_Id}}">
-        <option ng-repeat="name in Ids"  >
-          
+        <option ng-repeat="name in Ids" >
          {{name.Player_First_Name}} {{name.Player_Last_Name}}
         </option>
-        </a>
-      </select>
+       </a>
+      </select> --->
+      
+      <ul ng-repeat="name in Ids">
+        <li>
+          <a href="#/{{name.Player_Id}}">
+            {{name.Player_First_Name}} {{name.Player_Last_Name}}
+          </a>
+        </li>
+      </ul>
   
 </div>
 </br>

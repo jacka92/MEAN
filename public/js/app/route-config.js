@@ -34,7 +34,7 @@ app.config(['$routeProvider',
       })
       .when('/:playerId/',{
         templateUrl:'/js/app/players/players.html',
-        controller:'PlayersController'
+        controller:'ChartController'
       })
       .otherwise({
         redirectTo: '/players'

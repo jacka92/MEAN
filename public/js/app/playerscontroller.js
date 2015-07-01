@@ -1,19 +1,19 @@
-app.controller('PlayersController', function($scope, $http, $rootScope) {
+app.controller('PlayersController', function($scope, $http, $rootScope, $routeParams) {
   //load values for measures here and pass to scope
 
     $http.get('/orders/playersId').success(function(response){
         $scope.Ids = response;
-        
     });
 
   ///Wrap in function initiated when a player from dropdown has been selected!
 
-  $http.get("/orders/api/players") ///Ideally, get ("/orders/api/players:PlayerId")
+    
+        $http.get("/orders/api/players") 
     .success(function(response) {
       $scope.players = response;
 
       var cats = [];
-
+    ////Include var in scope to identify player in each graph
       var hml = [];
       var acc = [];
       var dec = [];
@@ -41,4 +41,7 @@ app.controller('PlayersController', function($scope, $http, $rootScope) {
       $rootScope.hsr = hsr;
       $rootScope.dist = dist;
     });
+    
+
+  
 });
