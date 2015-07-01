@@ -1,10 +1,24 @@
 <div ng-controller="PlayersController" style="text-align:center">
 <div class="widget">
-  <strong ng-show="!players">Loading...</strong>
-  <p ng-show="players[0].Player_First_Name">
-    
-  </p>
+  <strong ng-show="!Ids">Loading...</strong>
+  
+<!-----  <ul data-ng-repeat="name in names">
+    <li>{{name}}</li>
+  </ul> -->
+  
+    <!-- Simple dropdown -->
+   
+      <select class="dropdown-menu">
+        <a ng-repeat="name in Ids" href = "#/{{name.Player_Id}}">
+        <option ng-repeat="name in Ids"  >
+          
+         {{name.Player_First_Name}} {{name.Player_Last_Name}}
+        </option>
+        </a>
+      </select>
+  
 </div>
+</br>
 <a href="#/hml"><button>HML Distance</button></a>
 <a href="#/accelerations"><button>Accelerations</button></a> 
 <a href="#/decelerations"><button>Decelerations</button></a> 
