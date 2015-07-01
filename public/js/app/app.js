@@ -107,9 +107,13 @@ app.controller('HMLController', function($scope, $http, $rootScope) {
       chart: {
         type: "areaspline"
       },
+       xAxis: {
+        categories: $rootScope.cats ///array of dates
+      },
     },
     series: [{
       name: "Injury",
+       color: '#FF66FF',
       data: [1250, 1250, null, 1250, 2],
       connectNulls: false,
       id: "series-1"
@@ -119,7 +123,7 @@ app.controller('HMLController', function($scope, $http, $rootScope) {
       id: "series-2"
     }],
     title: {
-      text: "Hello"
+      text: "HML Distance"
     },
     loading: false,
     size: {}

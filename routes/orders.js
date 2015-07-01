@@ -3,6 +3,7 @@ var router = express.Router();
 var restrict = require('../auth/restrict')
 var spursData = require('../spurs/xlsxparse');
 var dbPush = require('../native-config');
+//var players_names_id = require('../')
 var mongoose = require('mongoose');
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
@@ -13,6 +14,7 @@ var mongo = require('mongodb');
 router.get('/', restrict, function(req, res, next) {
   //Push data to db
   //dbPush.insert();
+  //dbPush.addNames();
   
   if (!req.isAuthenticated()) {
     return res.redirect('/');
