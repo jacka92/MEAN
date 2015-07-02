@@ -135,7 +135,7 @@ app.controller('ChartController', function($scope, $http, $rootScope, $routePara
   ///Wrap in function initiated when a player from dropdown has been selected!
         console.log($routeParams);
     
-        $http.get("/orders/players/" + $routeParams.playerId)
+        $http.get("/players/players/" + $routeParams.playerId)
         
     .success(function(response) {
       $scope.players = response;

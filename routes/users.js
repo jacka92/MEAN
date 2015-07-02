@@ -31,7 +31,9 @@ router.post('/create', function(req, res, next) {
       return res.render('users/create', vm);
     }
     req.login(req.body, function(err) {
-      res.redirect('/orders');
+       if (err) {
+      console.log(err);}
+      res.redirect('/players');
     });
   });
 });
@@ -47,7 +49,7 @@ router.post('/login',
   },
   passport.authenticate('local', {
     failureRedirect: '/', 
-    successRedirect: '/orders',
+    successRedirect: '/players',
     failureFlash: 'Invalid credentials'
   }));
 

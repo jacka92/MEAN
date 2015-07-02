@@ -8,12 +8,11 @@ var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
 var connectMongo = require('connect-mongo');
-var xlsx = require('xlsx');
 
 var config = require('./config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var orders = require('./routes/orders');
+var players = require('./routes/players');
 
 var MongoStore = connectMongo(expressSession);
 
@@ -53,7 +52,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use(restrict);
-app.use('/orders', orders);
+app.use('/players', players);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

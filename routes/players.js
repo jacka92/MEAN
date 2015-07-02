@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
     
-var playerSchema = require('../models/spurs');
+
 var mongo = require('mongodb');
     
 router.get('/', restrict, function(req, res, next) {
@@ -29,7 +29,7 @@ router.get('/', restrict, function(req, res, next) {
   console.log("Player Id:" + vm.Id);
   
   
-  res.render('orders/index');
+  res.render('players/index');
   
 });
 

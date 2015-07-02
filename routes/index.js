@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.user) {
-    return res.redirect('/orders');
+    return res.redirect('/players');
   }
   var vm = {
     title: 'Login',
