@@ -1,29 +1,29 @@
-<div class="textwidget margin-top-30">
+  <div class="container">
   <p>Avoid over exertion in training, <em><strong>GPS Data</strong></em> visualises the data gathered from training sessions to help you keep track of performance and fatigue.</p>
   <p>Create an account to get started</p>
-</div>
-<div class="widget">
-  <form name="login-form" id="login-form" method="post" action="/users/login">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required />
-    </div>
-    <div class="form-group">
-      <label for="rememberMe">Remember Me</label>
+
+
+  <form class="form-signin" name="login-form" id="login-form" method="post" action="/users/login">
+    
+      <label class="sr-only" for="email">Email</label>
+      <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required />
+    
+      </br>
+      <label class="sr-only" for="password">Password</label>
+      <input type="password" class="form-control" placeholder="Password" id="password" name="password" required />
+    
+    </br>
+      <label  for="rememberMe">Remember Me</label>
       <input type="checkbox" id="password" name="rememberMe"  />
-    </div>
-    <div class="form-submit">
-      <input type="submit" value="Log in" />
+    
+    
+      <input type="submit" class="btn btn-lg btn-primary btn-block" value="Log in" />
       {{#if error}}
       <div style="color:red;">{{error}}</div>
       {{/if}}
       <div class="margin-top-30">
         or <a href="/users/create">Create an account</a>
       </div>
-    </div>
+   
   </form>
 </div>

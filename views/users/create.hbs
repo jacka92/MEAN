@@ -1,30 +1,27 @@
-<div class="textwidget margin-top-30">
-  </div>
-<div class="widget">
-  <form name="create-user-form" id="create-user-form" method="post" >
-    <div class="form-group">
-      <label for="firstName">First name</label>
-      <input type="text" id="firstName" name="firstName" required value="{{input.firstName}}" />
-    </div>
-    <div class="form-group">
-      <label for="lastName">Last name</label>
-      <input type="text" id="lastName" name="lastName" required value="{{input.lastName}}" />
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required value="{{input.email}}" />
-    </div>
-     <div class="form-group">
-      <label for="email">Player Id</label>
-      <input type="text" id="Id" name="Id" required value="{{input.Id}}" />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" autocomplete="off" required />
-    </div>
-    <div class="form-submit">
-      <input type="submit" value="Create my account" />
-    </div>
+
+<div class = "container">
+  <h2>
+    Please enter your details.
+  </h2>
+  <form class="form-signin" name="create-user-form" id="create-user-form" method="post" >
+    
+      <label class="sr-only" for="firstName">First name</label>
+      <input placeholder="First Name" class="form-control" type="text" id="firstName" name="firstName" required value="{{input.firstName}}" />
+    
+      <label class="sr-only" for="lastName">Last name</label>
+      <input placeholder="Last Name" class="form-control" type="text" id="lastName" name="lastName" required value="{{input.lastName}}" />
+    
+      <label class="sr-only" for="email">Email</label>
+      <input placeholder="Email Address" class="form-control" type="email" id="email" name="email" required value="{{input.email}}" />
+    
+      <label class="sr-only" for="email">Player Id</label>
+      <input placeholder="Player Id" class="form-control" type="text" id="Id" name="Id" required value="{{input.Id}}" />
+    
+      <label class="sr-only" for="password">Password</label>
+      <input placeholder="Password" class="form-control" type="password" id="password" name="password" autocomplete="off" required />
+    
+      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Create my account" />
+    
     <span style="color:red;">{{error}}</span>
   </form>
-</div>
+  </div>

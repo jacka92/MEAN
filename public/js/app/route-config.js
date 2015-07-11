@@ -33,7 +33,7 @@ app.config(['$routeProvider',
         controllerAs: 'vm'
       })
       .when('/:playerId/',{
-        templateUrl:'/js/app/pages/players.html',
+        templateUrl:'/js/app/pages/playerSelected.html',
         controller:'ChartController'
       })
       .otherwise({
