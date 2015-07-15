@@ -145,6 +145,90 @@ app.controller('hsrController', function($scope, $http, $rootScope) {
 
 });
 
+app.controller('fatigueController', function($scope, $http, $rootScope) {
+
+  $scope.name = $rootScope.playerName;
+
+  $scope.chartConfig = {
+    options: {
+      chart: {
+        type: 'line'
+      },
+      xAxis: {
+        categories: $rootScope.cats ///array of dates
+      },
+       yAxis: {
+        min: 0
+      }
+    },
+    series: [{
+      data: $rootScope.fatigue
+    }],
+    title: {
+      text: 'Fatigue Index'
+    },
+
+    loading: false
+  };
+
+});
+
+app.controller('spIntensityController', function($scope, $http, $rootScope) {
+
+  $scope.name = $rootScope.playerName;
+
+  $scope.chartConfig = {
+    options: {
+      chart: {
+        type: 'line'
+      },
+      xAxis: {
+        categories: $rootScope.cats ///array of dates
+      },
+       yAxis: {
+        min: 0
+      }
+    },
+    series: [{
+      data: $rootScope.spIntensity
+    }],
+    title: {
+      text: 'Speed Intensity'
+    },
+
+    loading: false
+  };
+
+});
+
+app.controller('dslController', function($scope, $http, $rootScope) {
+
+  $scope.name = $rootScope.playerName;
+
+  $scope.chartConfig = {
+    options: {
+      chart: {
+        type: 'line'
+      },
+      xAxis: {
+        categories: $rootScope.cats ///array of dates
+      },
+       yAxis: {
+        min: 0
+      }
+    },
+    series: [{
+      data: $rootScope.dsl
+    }],
+    title: {
+      text: 'Dynamic Stress Load'
+    },
+
+    loading: false
+  };
+
+});
+
 app.controller('ChartController', function($scope, $http, $rootScope, $routeParams) {
   
     var cats = [];
@@ -154,6 +238,9 @@ app.controller('ChartController', function($scope, $http, $rootScope, $routePara
       var dec = [];
       var hsr = [];
       var dist = [];
+      var fatigue = [];
+      var spIntensity = [];
+      var dsl = [];
       
       var players;
     
@@ -173,25 +260,31 @@ app.controller('ChartController', function($scope, $http, $rootScope, $routePara
         cats.push(string);
         
         console.log(string);
-        console.log(players[i].MEAN_of_Accelerations);
+        console.log(players[i].Accelerations);
         
         //push data here
         hml.push(parseInt(players[i].HML_Distance));
-        acc.push(parseInt(players[i].MEAN_of_Accelerations));
+        acc.push(parseInt(players[i].Accelerations));
         dec.push(parseInt(players[i].Decelerations));
         hsr.push(parseInt(players[i].High_Speed_Running));
-        dist.push(parseInt(players[i].Distance_Total));
+        dist.push(parseFloat(players[i].Distance_Total));
         
+        fatigue.push(parseFloat(players[i].Fatigue_Index));
+        spIntensity.push(parseInt(players[i].Speed_Intensity));
+        dsl.push(parseInt(players[i].Dynamic_Stress_Load)); 
       }
       
      
     });
       
-$rootScope.cats = cats;
+      $rootScope.cats = cats;
       $rootScope.hml = hml;
       $rootScope.acc = acc;
       $rootScope.dec = dec;
       $rootScope.hsr = hsr;
       $rootScope.dist = dist;
+      $rootScope.fatigue = fatigue;
+      $rootScope.spIntensity = spIntensity;
+      $rootScope.dsl = dsl;
   
 });

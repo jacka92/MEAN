@@ -32,6 +32,21 @@ app.config(['$routeProvider',
         controller: 'hsrController',
         
       })
+      .when('/fatigue', {
+        templateUrl: '/js/app/pages/fatigue.html',
+        controller: 'fatigueController',
+        
+      })
+      .when('/dsl', {
+        templateUrl: '/js/app/pages/dsl.html',
+        controller: 'dslController',
+        
+      })
+      .when('/spIntensity', {
+        templateUrl: '/js/app/pages/spIntensity.html',
+        controller: 'spIntensityController',
+        
+      })
       .when('/:playerId/',{
         templateUrl:'/js/app/pages/playerSelected.html',
         controller:'ChartController'

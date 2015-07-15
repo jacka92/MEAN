@@ -13,8 +13,9 @@ var mongo = require('mongodb');
     
 router.get('/', restrict, function(req, res, next) {
   //Push data to db
+  
   //dbPush.insert();
-  //dbPush.addNames();
+  
   
   if (!req.isAuthenticated()) {
     return res.redirect('/');
@@ -52,7 +53,7 @@ router.get('/players/:playerId', restrict, function(req, res, next) { ////api/pl
    mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
        if(err) { return console.dir(err); }
 
-       var collection = db.collection("test");
+       var collection = db.collection("Measures");
       //Return all from playerId collection so as to be rendered in dropdown
        collection.find({'Player_Id': req.params.playerId}).toArray(function(er,docs){ 
         
