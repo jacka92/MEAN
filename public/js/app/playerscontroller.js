@@ -1,7 +1,9 @@
-app.controller('PlayersController', function($scope, $http, $rootScope, $routeParams) {
+app.controller('PlayersController', function($scope, $http) {
   //load values for measures here and pass to scope
 
+    
+
     $http.get('/players/playersId').success(function(response){
-        $scope.Ids = response;
+       return $scope.Ids = response;
     });
 });

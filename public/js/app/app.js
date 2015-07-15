@@ -3,7 +3,7 @@
 var app = angular.module('app', ['ngResource', 'ngRoute', 'highcharts-ng','ui.bootstrap','nya.bootstrap.select']);
 
 app.controller('HMLController', function($scope, $http, $rootScope) {
-
+$scope.name = $rootScope.playerName;
   $scope.chartConfig = {
     options: {
       chart: {
@@ -12,6 +12,9 @@ app.controller('HMLController', function($scope, $http, $rootScope) {
        xAxis: {
         categories: $rootScope.cats ///array of dates
       },
+      yAxis: {
+        min: 0
+      }
     },
     series: [{
       name: "Injury",
@@ -35,7 +38,7 @@ app.controller('HMLController', function($scope, $http, $rootScope) {
 
 app.controller('accController', function($scope, $http, $rootScope) {
 
-
+$scope.name = $rootScope.playerName;
   $scope.chartConfig = {
     options: {
       chart: {
@@ -44,6 +47,9 @@ app.controller('accController', function($scope, $http, $rootScope) {
       xAxis: {
         categories: $rootScope.cats ///array of dates
       },
+       yAxis: {
+        min: 0
+      }
     },
     series: [{
       data: $rootScope.acc
@@ -58,7 +64,7 @@ app.controller('accController', function($scope, $http, $rootScope) {
 
 app.controller('decController', function($scope, $http, $rootScope) {
 
-
+$scope.name = $rootScope.playerName;
   $scope.chartConfig = {
     options: {
       chart: {
@@ -67,6 +73,9 @@ app.controller('decController', function($scope, $http, $rootScope) {
       xAxis: {
         categories: $rootScope.cats ///array of dates
       },
+       yAxis: {
+        min: 0
+      }
     },
     series: [{
       data: $rootScope.dec
@@ -78,11 +87,11 @@ app.controller('decController', function($scope, $http, $rootScope) {
     loading: false
   };
 
-
-
 });
 
 app.controller('distController', function($scope, $http, $rootScope) {
+
+$scope.name = $rootScope.playerName;
 
   $scope.chartConfig = {
     options: {
@@ -92,6 +101,9 @@ app.controller('distController', function($scope, $http, $rootScope) {
       xAxis: {
         categories: $rootScope.cats ///array of dates
       },
+       yAxis: {
+        min: 0
+      }
     },
     series: [{
       data: $rootScope.dist
@@ -107,6 +119,8 @@ app.controller('distController', function($scope, $http, $rootScope) {
 
 app.controller('hsrController', function($scope, $http, $rootScope) {
 
+  $scope.name = $rootScope.playerName;
+
   $scope.chartConfig = {
     options: {
       chart: {
@@ -115,6 +129,9 @@ app.controller('hsrController', function($scope, $http, $rootScope) {
       xAxis: {
         categories: $rootScope.cats ///array of dates
       },
+       yAxis: {
+        min: 0
+      }
     },
     series: [{
       data: $rootScope.hsr
@@ -129,47 +146,52 @@ app.controller('hsrController', function($scope, $http, $rootScope) {
 });
 
 app.controller('ChartController', function($scope, $http, $rootScope, $routeParams) {
-  //load values for measures here and pass to scope
-
-    
-  ///Wrap in function initiated when a player from dropdown has been selected!
-        console.log($routeParams);
-    
-        $http.get("/players/players/" + $routeParams.playerId)
-        
-    .success(function(response) {
-      $scope.players = response;
-
-      var cats = [];
-    ////Include var in scope to identify player in each graph
+  
+    var cats = [];
+   
       var hml = [];
       var acc = [];
       var dec = [];
       var hsr = [];
       var dist = [];
-
-      var players = $scope.players;
+      
+      var players;
+    
+      $http.get("/players/players/" + $routeParams.playerId)
+        
+    .success(function(response) {
+      
+      players = response;
+      
+      $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
+      $scope.name = $rootScope.playerName;
+      
       for (var i = 0; i < players.length; i++) {
         //push dates for each document
         var string = '';
         string = players[i].Session_Date;
         cats.push(string);
+        
+        console.log(string);
+        console.log(players[i].MEAN_of_Accelerations);
+        
         //push data here
         hml.push(parseInt(players[i].HML_Distance));
         acc.push(parseInt(players[i].MEAN_of_Accelerations));
         dec.push(parseInt(players[i].Decelerations));
         hsr.push(parseInt(players[i].High_Speed_Running));
         dist.push(parseInt(players[i].Distance_Total));
+        
       }
-
-      $rootScope.cats = cats;
+      
+     
+    });
+      
+$rootScope.cats = cats;
       $rootScope.hml = hml;
       $rootScope.acc = acc;
       $rootScope.dec = dec;
       $rootScope.hsr = hsr;
       $rootScope.dist = dist;
-    });
-    
-
   
 });

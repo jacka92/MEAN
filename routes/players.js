@@ -20,7 +20,6 @@ router.get('/', restrict, function(req, res, next) {
     return res.redirect('/');
   }
   var vm = {
-    //title: 'Personal Statistics',
     firstName: req.user? req.user.firstName: null,
     lastName: req.user? req.user.lastName: null,
     Id: req.user? req.user.Id: null
@@ -28,32 +27,9 @@ router.get('/', restrict, function(req, res, next) {
   console.log(vm.lastName);
   console.log("Player Id:" + vm.Id);
   
-  
   res.render('players/index');
-  
 });
 
-
-router.get('/api/players', restrict, function(req, res, next) { ////api/players:PlayerId
-  var vm = {
-    //title: 'Personal Statistics',
-    firstName: req.user? req.user.firstName: null,
-    lastName: req.user? req.user.lastName: null,
-    Id: req.user? req.user.Id: null
-  };
-   mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
-       if(err) { return console.dir(err); }
-
-       var collection = db.collection("test");
-      
-       collection.find({'Player_Id': vm.Id}).toArray(function(er,docs){ 
-        
-        if(err) { return console.dir(err); }
-        res.json(docs);
-      });
-      
-});
-});
 
 router.get('/playersId', restrict, function(req, res, next) { ////api/players:PlayerId
   
