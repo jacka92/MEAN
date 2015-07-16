@@ -1,0 +1,16 @@
+
+<h1>{{name}}</h1>
+<a href="#/players"><button class="btn btn-lg btn-primary">Select Player</button></a>
+<div id="container" style="width:100%; height:400px;">
+    <highchart id="chart1" config="chartConfig"></highchart>
+</div>
+  <div style="text-align:center;">
+  <a ng-hide="currentView.hmlHidden" href="#/view/0"><button class="btn btn-lg btn-primary">HML Distance</button></a>
+<a ng-hide="currentView.accHidden" href="#/view/1"><button class="btn btn-lg btn-primary">Accelerations</button></a> 
+<a ng-hide="currentView.decHidden" href="#/view/2"><button class="btn btn-lg btn-primary">Decelerations</button></a> 
+<a ng-hide="currentView.distHidden" href="#/view/3"><button class="btn btn-lg btn-primary">Distance Total</button></a> 
+<a ng-hide="currentView.hsrHidden" href="#/view/4"><button class="btn btn-lg btn-primary">High speed running</button></a> 
+<a ng-hide="currentView.spHidden" href="#/view/5"><button class="btn btn-lg btn-primary">Speed Intensity</button></a>
+<a ng-hide="currentView.dslHidden" href="#/view/6"><button class="btn btn-lg btn-primary">Dynamic Stress Load</button></a>
+<a ng-hide="currentView.fatigueHidden" href="#/view/7"><button class="btn btn-lg btn-primary">Fatigue Index</button></a>
+</div>

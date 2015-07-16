@@ -1,15 +1,135 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ngRoute', 'highcharts-ng','ui.bootstrap','nya.bootstrap.select']);
+var app = angular.module('app', ['ngResource', 'ngRoute', 'highcharts-ng', 'ui.bootstrap', 'nya.bootstrap.select']);
 
-app.controller('HMLController', function($scope, $http, $rootScope) {
-$scope.name = $rootScope.playerName;
+app.controller('ChartController', function($scope, $http, $rootScope, $routeParams) {
+
+  var cats = [];
+
+  var hml = [];
+  var acc = [];
+  var dec = [];
+  var hsr = [];
+  var dist = [];
+  var fatigue = [];
+  var spIntensity = [];
+  var dsl = [];
+
+  var players;
+
+  $http.get("/players/players/" + $routeParams.playerId)
+
+  .success(function(response) {
+
+    players = response;
+
+    $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
+    $scope.name = $rootScope.playerName;
+
+    for (var i = 0; i < players.length; i++) {
+      //push dates for each document
+      var string = '';
+      string = players[i].Session_Date;
+      cats.push(string);
+
+      //push data here
+      hml.push(parseInt(players[i].HML_Distance));
+      acc.push(parseInt(players[i].Accelerations));
+      dec.push(parseInt(players[i].Decelerations));
+      hsr.push(parseInt(players[i].High_Speed_Running));
+      dist.push(parseFloat(players[i].Distance_Total));
+
+      fatigue.push(parseFloat(players[i].Fatigue_Index));
+      spIntensity.push(parseInt(players[i].Speed_Intensity));
+      dsl.push(parseInt(players[i].Dynamic_Stress_Load));
+    }
+
+  });
+
+  $rootScope.cats = cats;
+  $rootScope.hml = hml;
+  $rootScope.acc = acc;
+  $rootScope.dec = dec;
+  $rootScope.hsr = hsr;
+  $rootScope.dist = dist;
+  $rootScope.fatigue = fatigue;
+  $rootScope.spIntensity = spIntensity;
+  $rootScope.dsl = dsl;
+
+  $scope.indices = [{
+    'viewId': 0,
+    'buttonText': 'HML Distance'
+  }, {
+    'viewId': 1,
+    'buttonText': 'Accelerations'
+  }, {
+    'viewId': 2,
+    'buttonText': 'Decelerations'
+  }, {
+    'viewId': 3,
+    'buttonText': 'Total Distance'
+  }, {
+    'viewId': 4,
+    'buttonText': 'High Speed Running'
+  }, {
+    'viewId': 5,
+    'buttonText': 'Speed Intensity'
+  }, {
+    'viewId': 6,
+    'buttonText': 'Dynamic Stress Load'
+  }, {
+    'viewId': 7,
+    'buttonText': 'Fatigue Index'
+  }];
+
+});
+
+app.controller('MeasuresChartController', function($scope, $rootScope, $routeParams) {
+
+  $scope.name = $rootScope.playerName;
+
+  var views = [{
+    'data': $rootScope.hml,
+    'hmlHidden': true,
+    'text': 'High Metabolic Load Distance'
+  }, {
+    'data': $rootScope.acc,
+    'accHidden': true,
+    'text': 'Accelerations'
+  }, {
+    'data': $rootScope.dec,
+    'decHidden': true,
+    'text': 'Decelerations'
+  }, {
+    'data': $rootScope.dist,
+    'distHidden': true,
+    'text': 'Distance Total'
+  }, {
+    'data': $rootScope.hsr,
+    'hsrHidden': true,
+    'text': 'High Speed Running'
+  }, {
+    'data': $rootScope.spIntensity,
+    'spHidden': true,
+    'text': 'Speed Intensity'
+  }, {
+    'data': $rootScope.dsl,
+    'dslHidden': true,
+    'text': 'Dynamic Stress Load'
+  }, {
+    'data': $rootScope.fatigue,
+    'fatigueHidden': true,
+    'text': 'Fatigue Index'
+  }];
+
+  $scope.currentView = views[$routeParams.viewId]; //might have to append .viewId to routeparams. Could use scope here if not working
+
   $scope.chartConfig = {
     options: {
       chart: {
-        type: "areaspline"
+        type: 'line'
       },
-       xAxis: {
+      xAxis: {
         categories: $rootScope.cats ///array of dates
       },
       yAxis: {
@@ -17,274 +137,13 @@ $scope.name = $rootScope.playerName;
       }
     },
     series: [{
-      name: "Injury",
-       color: '#FF66FF',
-      data: [1250, 1250, null, 1250, 2],
-      connectNulls: false,
-      id: "series-1"
-    }, {
-      name: "HML",
-      data: $rootScope.hml,
-      id: "series-2"
+      data: $scope.currentView.data //// measures array selected from object array
     }],
     title: {
-      text: "HML Distance"
-    },
-    loading: false,
-    size: {}
-  };
-
-});
-
-app.controller('accController', function($scope, $http, $rootScope) {
-
-$scope.name = $rootScope.playerName;
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.acc
-    }],
-    title: {
-      text: 'Accelerations'
-    },
-
-    loading: false
-  };
-});
-
-app.controller('decController', function($scope, $http, $rootScope) {
-
-$scope.name = $rootScope.playerName;
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.dec
-    }],
-    title: {
-      text: 'Decelerations'
+      text: $scope.currentView.text ///object also needs text for type of measure
     },
 
     loading: false
   };
 
-});
-
-app.controller('distController', function($scope, $http, $rootScope) {
-
-$scope.name = $rootScope.playerName;
-
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.dist
-    }],
-    title: {
-      text: 'Distance Total'
-    },
-
-    loading: false
-  };
-
-});
-
-app.controller('hsrController', function($scope, $http, $rootScope) {
-
-  $scope.name = $rootScope.playerName;
-
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.hsr
-    }],
-    title: {
-      text: 'High Speed Running'
-    },
-
-    loading: false
-  };
-
-});
-
-app.controller('fatigueController', function($scope, $http, $rootScope) {
-
-  $scope.name = $rootScope.playerName;
-
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.fatigue
-    }],
-    title: {
-      text: 'Fatigue Index'
-    },
-
-    loading: false
-  };
-
-});
-
-app.controller('spIntensityController', function($scope, $http, $rootScope) {
-
-  $scope.name = $rootScope.playerName;
-
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.spIntensity
-    }],
-    title: {
-      text: 'Speed Intensity'
-    },
-
-    loading: false
-  };
-
-});
-
-app.controller('dslController', function($scope, $http, $rootScope) {
-
-  $scope.name = $rootScope.playerName;
-
-  $scope.chartConfig = {
-    options: {
-      chart: {
-        type: 'line'
-      },
-      xAxis: {
-        categories: $rootScope.cats ///array of dates
-      },
-       yAxis: {
-        min: 0
-      }
-    },
-    series: [{
-      data: $rootScope.dsl
-    }],
-    title: {
-      text: 'Dynamic Stress Load'
-    },
-
-    loading: false
-  };
-
-});
-
-app.controller('ChartController', function($scope, $http, $rootScope, $routeParams) {
-  
-    var cats = [];
-   
-      var hml = [];
-      var acc = [];
-      var dec = [];
-      var hsr = [];
-      var dist = [];
-      var fatigue = [];
-      var spIntensity = [];
-      var dsl = [];
-      
-      var players;
-    
-      $http.get("/players/players/" + $routeParams.playerId)
-        
-    .success(function(response) {
-      
-      players = response;
-      
-      $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
-      $scope.name = $rootScope.playerName;
-      
-      for (var i = 0; i < players.length; i++) {
-        //push dates for each document
-        var string = '';
-        string = players[i].Session_Date;
-        cats.push(string);
-        
-        console.log(string);
-        console.log(players[i].Accelerations);
-        
-        //push data here
-        hml.push(parseInt(players[i].HML_Distance));
-        acc.push(parseInt(players[i].Accelerations));
-        dec.push(parseInt(players[i].Decelerations));
-        hsr.push(parseInt(players[i].High_Speed_Running));
-        dist.push(parseFloat(players[i].Distance_Total));
-        
-        fatigue.push(parseFloat(players[i].Fatigue_Index));
-        spIntensity.push(parseInt(players[i].Speed_Intensity));
-        dsl.push(parseInt(players[i].Dynamic_Stress_Load)); 
-      }
-      
-     
-    });
-      
-      $rootScope.cats = cats;
-      $rootScope.hml = hml;
-      $rootScope.acc = acc;
-      $rootScope.dec = dec;
-      $rootScope.hsr = hsr;
-      $rootScope.dist = dist;
-      $rootScope.fatigue = fatigue;
-      $rootScope.spIntensity = spIntensity;
-      $rootScope.dsl = dsl;
-  
 });
