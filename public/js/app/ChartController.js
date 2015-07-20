@@ -1,4 +1,4 @@
-app.controller('ChartController', ['$route', 'stats', '$scope', '$rootScope', '$routeParams', function($route, stats, $scope, $rootScope, $routeParams) {
+app.controller('ChartController', ['$http','$route', 'stats', '$scope', '$rootScope', '$routeParams', function($http,$route, stats, $scope, $rootScope, $routeParams) {
 
   var cats = [];
 
@@ -10,6 +10,7 @@ app.controller('ChartController', ['$route', 'stats', '$scope', '$rootScope', '$
   var fatigue = [];
   var spIntensity = [];
   var dsl = [];
+  var injuries = [];
 
   var path = "/players/players/" + $routeParams.playerId;
 
@@ -17,6 +18,19 @@ app.controller('ChartController', ['$route', 'stats', '$scope', '$rootScope', '$
   stats.getStats(path).then(function(response) {
     
     players = response.data;
+    
+    $http.get('/players/injuries/' + $routeParams.playerId).success(function(response){
+       
+       var inj = response;
+       
+       console.log(response);
+       
+       for(var i=0;i<inj.length;i++){
+         injuries.push(parseInt(inj[i].Injury));
+       }
+       $rootScope.injuries = injuries;
+       return;
+    });
     
      $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
     $scope.name = $rootScope.playerName;
@@ -48,6 +62,7 @@ app.controller('ChartController', ['$route', 'stats', '$scope', '$rootScope', '$
   $rootScope.fatigue = fatigue;
   $rootScope.spIntensity = spIntensity;
   $rootScope.dsl = dsl;
+  
 
   $scope.indices = [{
     'viewId': 0,

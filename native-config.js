@@ -16,7 +16,7 @@ exports.insertTest = function(){
 exports.insert = function(){
      MongoClient.connect('mongodb://localhost:27017/rtr', function(err, db) {
   if (err) throw err;
-	db.collection('Measures').insert(spursData, function(err, records) {
+	db.collection('Injuries').insert(spursData, function(err, records) {
 		if (err) throw err;
 	});
 });

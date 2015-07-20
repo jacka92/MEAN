@@ -41,18 +41,26 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
   $scope.chartConfig = {
     options: {
       chart: {
-        type: 'line'
+        type: 'areaspline'
       },
       xAxis: {
         categories: $rootScope.cats, ///array of dates
-        tickPixelInterval: 1
       },
       yAxis: {
         min: 0
       }
     },
-    series: [{
+    series: [
+      {
+      name: "Stats",
       data: $scope.currentView.data //// measures array selected from object array
+    },
+    {
+      name: "Injury",
+      color: '#FF66FF',
+      data: $rootScope.injuries,
+      connectNulls: false,
+      id: "Injuries"
     }],
     title: {
       text: $scope.currentView.text ///object also needs text for type of measure

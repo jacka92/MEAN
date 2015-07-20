@@ -73,3 +73,8 @@ button{
 h1{
   text-align:center;
 }
+
+#chart1{
+  width: auto;
+  height: auto;
+}
