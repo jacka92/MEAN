@@ -14,7 +14,6 @@ exports.addUser = function(user, next) {
       Id: user.Id,
       password: hash
     });
-    
     newUser.save(function(err) {
       if (err) {
         return next(err);

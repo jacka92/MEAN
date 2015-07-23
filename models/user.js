@@ -7,7 +7,7 @@ var userSchema = new Schema({
   lastName: {type: String, required: 'Please enter your last name'},
   email: {type: String, required: 'Please enter your email'},
   Id: {type: String, required: 'Please enter your Id'},
-  password: {type: String, required: 'Please enter your password'},
+  password: {type: String, required: 'Please enter your password', min:[10, 'Please use a longer password']},
   created: {type: Date, default: Date.now}
 });
 
@@ -19,7 +19,7 @@ userSchema.path('email').validate(function(value, next) {
     }
     next(!user);
   });
-}, 'That email is already in use');
+}, 'That email is already in use !!!');
 
 var User = mongoose.model('User', userSchema);
 

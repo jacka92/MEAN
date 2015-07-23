@@ -5,7 +5,6 @@ var userService = require('../services/user-service');
 var config = require('../config');
 
 
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -21,7 +20,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', function(req, res, next) {
   userService.addUser(req.body, function(err) {
     if (err) {
-      console.log(err);
+      console.log(err + "Error 1!");
       var vm = {
         title: 'Create an account',
         input: req.body,
@@ -31,8 +30,7 @@ router.post('/create', function(req, res, next) {
       return res.render('users/create', vm);
     }
     req.login(req.body, function(err) {
-       if (err) {
-      console.log(err);}
+       
       res.redirect('/players');
     });
   });

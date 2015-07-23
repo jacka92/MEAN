@@ -44,7 +44,10 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
         type: 'areaspline'
       },
       xAxis: {
-        categories: $rootScope.cats, ///array of dates
+        categories: $rootScope.cats,
+        labels: {
+                         enabled:false,//default is true
+                        }///array of dates
       },
       yAxis: {
         min: 0
@@ -55,18 +58,29 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
       name: "Stats",
       data: $scope.currentView.data //// measures array selected from object array
     },
-    {
-      name: "Injury",
-      color: '#FF66FF',
-      data: $rootScope.injuries,
-      connectNulls: false,
-      id: "Injuries"
-    }],
+   ],
     title: {
       text: $scope.currentView.text ///object also needs text for type of measure
     },
     
     loading: false
   };
+  
+  var injD = {
+    name: "Injury",
+      color: '#FF66FF',
+      data: $rootScope.injuries,
+      connectNulls: false,
+      id: "Injuries"
+  };
+  
+ $scope.toggleInj = function(){
+    if ($scope.chartConfig.series.length > 1){
+      $scope.chartConfig.series.pop();
+    }else{
+      $scope.chartConfig.series.push(injD);
+    }
+  }
+  
 
 });

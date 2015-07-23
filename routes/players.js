@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var restrict = require('../auth/restrict')
-var spursData = require('../spurs/xlsxparse');
+var restrict = require('../auth/restrict');
 var dbPush = require('../native-config');
 //var players_names_id = require('../')
 var mongoose = require('mongoose');
@@ -32,7 +31,7 @@ router.get('/', restrict, function(req, res, next) {
 });
 
 
-router.get('/playersId', restrict, function(req, res, next) { ////api/players:PlayerId
+router.get('/playersId', restrict, function(req, res, next) {
   
    mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
        if(err) { return console.dir(err); }
@@ -48,13 +47,10 @@ router.get('/playersId', restrict, function(req, res, next) { ////api/players:Pl
 });
 });
 
-router.get('/players/:playerId', restrict, function(req, res, next) { ////api/players:PlayerId
-  /////populate $rootScope variables with measures for particular player
+router.get('/players/:playerId', restrict, function(req, res, next) { 
    mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
        if(err) { return console.dir(err); }
-
        var collection = db.collection("Measures");
-      //Return all from playerId collection so as to be rendered in dropdown
        collection.find({'Player_Id': req.params.playerId}).toArray(function(er,docs){ 
         
         if(err) { return console.dir(err); }
