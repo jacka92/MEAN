@@ -41,7 +41,7 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
   $scope.chartConfig = {
     options: {
       chart: {
-        type: 'areaspline'
+        type: $rootScope.chartType
       },
       xAxis: {
         categories: $rootScope.cats,
@@ -53,12 +53,12 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
         min: 0
       }
     },
-    series: [
+ /*   series: [
       {
       name: "Stats",
       data: $scope.currentView.data //// measures array selected from object array
     },
-   ],
+   ],*/
     title: {
       text: $scope.currentView.text ///object also needs text for type of measure
     },
@@ -74,13 +74,30 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
       id: "Injuries"
   };
   
+  if($rootScope.xseries){ //////////if isset
+    $scope.chartConfig.series = $rootScope.xseries;
+  }else{
+    $scope.chartConfig.series = [
+      {
+      name: "Stats",
+      data: $scope.currentView.data //// measures array selected from object array
+    }
+   ];
+  }
+  
  $scope.toggleInj = function(){
     if ($scope.chartConfig.series.length > 1){
       $scope.chartConfig.series.pop();
+      $scope.chartConfig.options.chart.type = 'line';
+      $rootScope.chartType = 'line';
+      
     }else{
       $scope.chartConfig.series.push(injD);
+      $scope.chartConfig.options.chart.type = 'areaspline';
+      $rootScope.chartType = 'areaspline';
+      
     }
-  }
+  };
   
 
 });

@@ -34,7 +34,7 @@ app.controller('ChartController', ['$http','$route', 'stats', '$scope', '$rootSc
     
      $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
     $scope.name = $rootScope.playerName;
-
+    $rootScope.chartType = 'line';
   for (var i = 0; i < players.length; i++) {
     //push dates for each document
     var string = '';

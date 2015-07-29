@@ -10,7 +10,7 @@ var async = require('async');
 var socketio = require('socket.io');
 var express = require('express');
 
-var employeeService = require('../services/players');
+
 var responder = require('../responseGenerator');
 var staticFile = responder.staticfile('../public');
 
