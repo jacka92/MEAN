@@ -1,22 +1,17 @@
+Building the application
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+1) Install npm (node packaged modules) if not currently present with:
+
+$ sudo apt-get install npm
+
+2) Run the run.sh file - this will install node dependencies, install mongodb, run the mongo server and populate the database
+
+3) Run the www file in the bin directory with Node. The app will launch on port 3000 of local host.
+
+The mongo shell can be run by opening a new terminal window and running mongo db to access the 'db' database.
 
 
-Welcome to your Node.js project on Cloud9 IDE!
+Database Instructions:
 
-This chat example showcases how to use `socket.io` with a static `express` server.
-
-## Running the server
-
-1) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
-
-2) Alternatively you can launch the app from the Terminal:
-
-    $ node server.js
-
-Once the server is running, open the project in the shape of 'https://projectname-username.c9.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
+Please note the three excel files in the ./spurs directory. Please keep the first row of values for each column,
+cut and paste values for the app to visualise them.
