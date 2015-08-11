@@ -7,14 +7,6 @@ var MongoClient = require('mongodb').MongoClient,
 var MongoClient = require('mongodb').MongoClient,
     format = require('util').format;
 
-var XLSX;
-if (typeof require !== 'undefined') XLSX = require('xlsx');
-
-var workbook = XLSX.readFile(__dirname + '/full_14_15_daily_loads.xlsx');
-
-var worksheet = workbook.Sheets['Sheet1'];
-
-var spursData = XLSX.utils.sheet_to_json(worksheet);
 
 MongoClient.connect('mongodb://localhost:27017/rtr', function(err, db) {
     if (err) throw err;
