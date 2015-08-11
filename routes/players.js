@@ -47,16 +47,31 @@ router.get('/playersId', restrict, function(req, res, next) {
 });
 });
 
-router.get('/players/:playerId', restrict, function(req, res, next) { 
+router.get('/playersId/:playerId', restrict, function(req, res, next) {
+  
    mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
        if(err) { return console.dir(err); }
-       var collection = db.collection("Measures");
+
+       var collection = db.collection("playerId");
+      //Return all from playerId collection so as to be rendered in dropdown
        collection.find({'Player_Id': req.params.playerId}).toArray(function(er,docs){ 
         
         if(err) { return console.dir(err); }
         res.json(docs);
       });
       
+});
+});
+
+router.get('/players/:playerId', restrict, function(req, res, next) { 
+   mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
+       if(err) { return console.dir(err); }
+       var collection = db.collection("Full");
+       collection.find({'Player_Id': req.params.playerId}).toArray(function(er,docs){ 
+        
+        if(err) { return console.dir(err); }
+        res.json(docs);
+      });
 });
 });
 
