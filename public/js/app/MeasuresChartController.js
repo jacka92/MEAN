@@ -53,12 +53,6 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
         min: 0
       }
     },
- /*   series: [
-      {
-      name: "Stats",
-      data: $scope.currentView.data //// measures array selected from object array
-    },
-   ],*/
     title: {
       text: $scope.currentView.text ///object also needs text for type of measure
     },
@@ -74,7 +68,7 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
       id: "Injuries"
   };
   
-  if($rootScope.xseries){ //////////if isset
+  if($rootScope.xseries){ //////////Doesn't do anything. Something tried when cleaning up UI
     $scope.chartConfig.series = $rootScope.xseries;
   }else{
     $scope.chartConfig.series = [
@@ -97,6 +91,35 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
       $rootScope.chartType = 'areaspline';
       
     }
+  };
+  
+  $scope.togglePeriod = function(){
+    //Add weekly field to current view objects with weekly stats!
+    //May have to change 52 val depending on number of entries for weekly
+    ///May also want to set chart config series name appropriately (e.g. daily stats/weekly stats)
+    /*
+    
+    //if data greater than 52 it must be days (and injuries off)
+    if($scope.chartConfig.series.data > 52 && $scope.chartConfig.series.length === 1){
+      $scope.chartConfig.series.pop();    
+      $scope.chartConfig.series.push($scope.currentview.weeklydata);
+      //If days data and injuries on
+    }else if($scope.chartConfig.series.data > 52 && $scope.chartConfig.series.length > 1){
+      $scope.chartConfig.series.pop();
+      $scope.chartConfig.series.pop();
+      $scope.chartConfig.series.push($scope.currentview.weeklydata);
+      //weekly data
+    }else{
+       $scope.chartConfig.series.pop();
+       $scope.chartConfig.series.push($scope.currentview.data);
+    }
+    
+    
+    
+    
+    */
+    
+    
   };
   
 
