@@ -23,13 +23,7 @@ app.controller('ChartController', ['$http', '$route', 'stats', '$scope', '$rootS
   
   stats.getStats(path).then(function(response) {
 
-    
-    
     var players = response.data;
-    
-    // $scope.name = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
-
-    // $rootScope.playerName = players[0].Player_First_Name + " " + players[0].Player_Last_Name;
     
     $rootScope.chartType = 'line';
     for (var i = 0; i < players.length; i++) {
@@ -37,8 +31,6 @@ app.controller('ChartController', ['$http', '$route', 'stats', '$scope', '$rootS
       var string = '';
       string = players[i].Session_Date;
       cats.push(string);
-
-      //push data here
       hml.push(parseInt(players[i].HML_Distance));
       acc.push(parseInt(players[i].Accelerations));
       dec.push(parseInt(players[i].Decelerations));
