@@ -7,6 +7,8 @@ var worksheet = workbook.Sheets['Sheet1'];
 
 var spursData = XLSX.utils.sheet_to_json(worksheet);
 
+console.log(spursData);
+
 module.exports = spursData;
 
 
