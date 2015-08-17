@@ -74,6 +74,8 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
 
     loading: false
   };
+  
+  //$scope.currentView.data
 
   var injD = {
     name: "Injury",
