@@ -11,6 +11,7 @@ app.controller('ChartController', ['$http', '$route', 'stats', '$scope', '$rootS
   var dsl = [];
   var injuries = [];
   
+  
   $scope.indices = [{
       'viewId': 0,
       'buttonText': 'HML Distance'
@@ -40,10 +41,9 @@ app.controller('ChartController', ['$http', '$route', 'stats', '$scope', '$rootS
   var path = "/players/players/" + $routeParams.playerId;
 
   //Op 1: Get player name
-  $http.get("/players/playersId/" + $routeParams.playerId).success(function(response) { ////////setup new route for returning a single player name
+  $http.get("/players/playersId/" + $routeParams.playerId).success(function(response) { 
     $scope.name = response[0].Player_First_Name + " " + response[0].Player_Last_Name;
-
-    $rootScope.playerName = response[0].Player_First_Name + " " + response[0].Player_Last_Name; //////from playerId
+    $rootScope.playerName = response[0].Player_First_Name + " " + response[0].Player_Last_Name; 
   });
 
   //Op 2: Get player daily stats
