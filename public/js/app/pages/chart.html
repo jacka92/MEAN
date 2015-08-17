@@ -2,6 +2,10 @@
 <h1>{{name}}</h1>
 <h2>Period: {{period}}</h2>
 <a href="#/players"><button class="btn btn-lg btn-primary">Select Player</button></a>
+<div style="text-align:center;">
+<button ng-click="toggleInj()" class="btn btn-lg btn-success" style="visibility: {{perDisplay}}">Toggle Injury</button>
+<button ng-click = "togglePeriod()" class="btn btn-lg btn-success" >Toggle Period</button>
+</div>
 <div id="container" style="width:100%; height:400px;">
     <highchart id="chart1" config="chartConfig"></highchart>
 </div>
@@ -16,7 +20,6 @@
 <a ng-hide="currentView.fatigueHidden" href="#/view/7"><button class="btn btn-lg btn-primary">Fatigue Index</button></a>
 
 </br>
-<button ng-click="toggleInj()" class="btn btn-lg btn-success" style="visibility: {{perDisplay}}">Toggle Injury</button>
-<button ng-click = "togglePeriod()" class="btn btn-lg btn-success" >Toggle Period</button>
+
 
 </div>
