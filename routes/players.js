@@ -13,9 +13,6 @@ var mongo = require('mongodb');
 router.get('/', restrict, function(req, res, next) {
   //Push data to db
   
-  //dbPush.insert();
-  
-  
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
@@ -90,6 +87,24 @@ router.get('/injuries/:playerId', restrict, function(req, res, next) {
       
 });
 });
+
+router.get('/weekly/:playerId', restrict, function(req, res, next) { 
+  /////populate $rootScope variables with measures for particular player
+   mongo.connect("mongodb://localhost:27017/rtr", function(err, db){
+       if(err) { return console.dir(err); }
+
+       var collection = db.collection("Weekly");
+      
+       collection.find({'Player_Id': req.params.playerId}).toArray(function(er,docs){ 
+        
+        if(err) { return console.dir(err); }
+        //console.log(docs);
+        res.json(docs);
+      });
+      
+});
+});
+
 
 
 

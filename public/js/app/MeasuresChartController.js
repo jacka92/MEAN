@@ -5,40 +5,57 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
   var views = [{
     'data': $rootScope.hml,
     'hmlHidden': true,
-    'text': 'High Metabolic Load Distance'
+    'text': 'High Metabolic Load Distance',
+    'weekly':$rootScope.wHml
   }, {
     'data': $rootScope.acc,
     'accHidden': true,
-    'text': 'Accelerations'
+    'text': 'Accelerations',
+    'weekly':$rootScope.wAcc
   }, {
     'data': $rootScope.dec,
     'decHidden': true,
-    'text': 'Decelerations'
+    'text': 'Decelerations',
+    'weekly':$rootScope.wDec
   }, {
     'data': $rootScope.dist,
     'distHidden': true,
-    'text': 'Distance Total'
+    'text': 'Distance Total',
+    'weekly':$rootScope.wDist
   }, {
     'data': $rootScope.hsr,
     'hsrHidden': true,
-    'text': 'High Speed Running'
+    'text': 'High Speed Running',
+    'weekly':$rootScope.wHsr
   }, {
     'data': $rootScope.spIntensity,
     'spHidden': true,
-    'text': 'Speed Intensity'
+    'text': 'Speed Intensity',
+    'weekly':$rootScope.wSpIntensity
   }, {
     'data': $rootScope.dsl,
     'dslHidden': true,
-    'text': 'Dynamic Stress Load'
+    'text': 'Dynamic Stress Load',
+    'weekly':$rootScope.wDsl
   }, {
     'data': $rootScope.fatigue,
     'fatigueHidden': true,
-    'text': 'Fatigue Index'
+    'text': 'Fatigue Index',
+    'weekly':$rootScope.wFatigue
   }];
 
-  $scope.currentView = views[$routeParams.viewId]; 
+  $scope.currentView = views[$routeParams.viewId];
+  
+  $scope.period = "Daily";
+  $scope.perDisplay = "visible";
 
   $scope.chartConfig = {
+    series: [
+      {
+      name: "Stats",
+      data: $scope.currentView.data 
+    }
+   ],
     options: {
       chart: {
         type: $rootScope.chartType
@@ -68,16 +85,7 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
       id: "Injuries"
   };
   
-  if($rootScope.xseries){ //////////Doesn't do anything. Something tried when cleaning up UI
-    $scope.chartConfig.series = $rootScope.xseries;
-  }else{
-    $scope.chartConfig.series = [
-      {
-      name: "Stats",
-      data: $scope.currentView.data //// measures array selected from object array
-    }
-   ];
-  }
+  
   
  $scope.toggleInj = function(){
     if ($scope.chartConfig.series.length > 1){
@@ -93,32 +101,47 @@ app.controller('MeasuresChartController', function($scope, $rootScope, $routePar
     }
   };
   
+  var weekly = {
+    name: "Weekly",
+    data: $scope.currentView.weekly
+  };
+  
+  var daily = {
+    name: "Daily",
+    data: $scope.currentView.data
+  };
+  
   $scope.togglePeriod = function(){
-    //Add weekly field to current view objects with weekly stats!
     //May have to change 52 val depending on number of entries for weekly
     ///May also want to set chart config series name appropriately (e.g. daily stats/weekly stats)
-    /*
+    console.log($scope.currentView.weekly);
+    console.log($rootScope.wCats);
     
-    //if data greater than 52 it must be days (and injuries off)
-    if($scope.chartConfig.series.data > 52 && $scope.chartConfig.series.length === 1){
+    //if daily stats (and injuries off)
+    if($scope.chartConfig.options.xAxis.categories ===$rootScope.cats && $scope.chartConfig.series.length === 1){
+      //Make injury button invisible
+      $scope.perDisplay = "hidden";
       $scope.chartConfig.series.pop();    
-      $scope.chartConfig.series.push($scope.currentview.weeklydata);
+      $scope.chartConfig.series.push(weekly);
+      $scope.chartConfig.options.xAxis.categories = $rootScope.wCats;
+      $scope.period = "Weekly";
       //If days data and injuries on
-    }else if($scope.chartConfig.series.data > 52 && $scope.chartConfig.series.length > 1){
+    }else if($scope.chartConfig.options.xAxis.categories ===$rootScope.cats && $scope.chartConfig.series.length > 1){
+      //Make injury button invisible
+      $scope.perDisplay = "hidden";
       $scope.chartConfig.series.pop();
       $scope.chartConfig.series.pop();
-      $scope.chartConfig.series.push($scope.currentview.weeklydata);
+      $scope.chartConfig.series.push(weekly);
+      $scope.chartConfig.options.xAxis.categories = $rootScope.wCats;
+      $scope.period = "Weekly";
       //weekly data
     }else{
        $scope.chartConfig.series.pop();
-       $scope.chartConfig.series.push($scope.currentview.data);
+       $scope.chartConfig.series.push(daily);
+       $scope.chartConfig.options.xAxis.categories = $rootScope.cats;
+       $scope.period = "Daily";
+       $scope.perDisplay = "visible";
     }
-    
-    
-    
-    
-    */
-    
     
   };
   
