@@ -29,8 +29,9 @@ router.post('/create', function(req, res, next) {
       delete vm.input.password;
       return res.render('users/create', vm);
     }
+    //Create user is successful
     req.login(req.body, function(err) {
-       
+      
       res.redirect('/players');
     });
   });

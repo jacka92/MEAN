@@ -14,12 +14,12 @@ var userSchema = new Schema({
 userSchema.path('email').validate(function(value, next) {
   userService.findUser(value, function(err, user) {
     if (err) {
-      console.log(err);
+      console.log(err + "Error executes");
       return next(false);
     }
     next(!user);
   });
-}, 'That email is already in use !!!');
+},  'That email is already in use !!!');
 
 var User = mongoose.model('User', userSchema);
 

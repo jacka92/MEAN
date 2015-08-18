@@ -24,6 +24,8 @@ module.exports = function() {
     });
   }));
   
+  
+  //Stores user in sessions
   passport.serializeUser(function(user, next) {
     next(null, user.email);
   });

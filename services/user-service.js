@@ -12,7 +12,7 @@ exports.addUser = function(user, next) {
       lastName: user.lastName,
       email: user.email.toLowerCase(),
       Id: user.Id,
-      password: hash
+      password: user.password
     });
     newUser.save(function(err) {
       if (err) {

@@ -21,9 +21,6 @@ router.get('/', restrict, function(req, res, next) {
     lastName: req.user? req.user.lastName: null,
     Id: req.user? req.user.Id: null
   };
-  console.log(vm.lastName);
-  console.log("Player Id:" + vm.Id);
-  
   res.render('players/index');
 });
 
