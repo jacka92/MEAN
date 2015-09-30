@@ -6,7 +6,6 @@ var userSchema = new Schema({
   firstName: {type: String, required: 'Please enter your first name'},
   lastName: {type: String, required: 'Please enter your last name'},
   email: {type: String, required: 'Please enter your email'},
-  Id: {type: String, required: 'Please enter your Id'},
   password: {type: String, required: 'Please enter your password', min:[10, 'Please use a longer password']},
   created: {type: Date, default: Date.now}
 });

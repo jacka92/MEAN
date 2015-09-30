@@ -12,7 +12,7 @@ var connectMongo = require('connect-mongo');
 var config = require('./config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var players = require('./routes/players');
+var dashboard = require('./routes/dashboard');
 
 var MongoStore = connectMongo(expressSession);
 
@@ -52,7 +52,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use(restrict);
-app.use('/players', players);
+app.use('/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

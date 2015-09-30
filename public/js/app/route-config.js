@@ -2,20 +2,20 @@ app.config(['$routeProvider',
   
   function($routeProvider) {
     $routeProvider
-      .when('/players', {
-        templateUrl: '/js/app/pages/players.html',
-        controller: 'PlayersController',
+      .when('/dashboard', {
+        templateUrl: '/js/app/pages/dash.html',
+        controller: 'MainController',
       })
-      .when('/:playerId/',{
-        templateUrl:'/js/app/pages/playerSelected.html',
-        controller:'ChartController'
+      .when('/1/',{
+        templateUrl:'/js/app/pages/page1.html',
+        controller:'MainController'
       })
-      .when('/view/:viewId/',{
-        templateUrl:'/js/app/pages/chart.html',
-        controller:'MeasuresChartController'
+      .when('/2/',{
+        templateUrl:'/js/app/pages/page2.html',
+        controller:'MainController'
       })
       .otherwise({
-        redirectTo: '/players'
+        redirectTo: '/dashboard'
       });
   }
 ]);

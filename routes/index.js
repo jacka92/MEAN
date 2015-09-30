@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.user) {
-    return res.redirect('/players');
+    return res.redirect('/dashboard');
   }
   var vm = {
     title: 'Login',

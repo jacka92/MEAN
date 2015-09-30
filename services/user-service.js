@@ -11,7 +11,6 @@ exports.addUser = function(user, next) {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email.toLowerCase(),
-      Id: user.Id,
       password: user.password
     });
     newUser.save(function(err) {
